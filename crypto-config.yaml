@@ -1,0 +1,29 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: qklszzn.com
+    Specs:
+      - Hostname: orderer
+
+PeerOrgs:
+  - Name: bc_org1
+    Domain: org1.qklszzn.com
+    Template:
+      Count: 3
+    Users:
+      Count: 4
+
+
+  - Name: bc_org2
+    Domain: org2.qklszzn.com
+    Template:
+      Count: 3
+    Users:
+      Count: 4
+
+
+  - Name: bc_org3
+    Domain: org3.qklszzn.com
+    Template:
+      Count: 3
+    Users:
+      Count: 4

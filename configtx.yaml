@@ -1,0 +1,98 @@
+Profiles:
+
+    TestOrgsOrdererGenesis:
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *bc_org1
+                    - *bc_org2
+                    - *bc_org3
+
+    TestOrgChannel:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *bc_org1
+                - *bc_org2
+                - *bc_org3
+
+    TestOrgsChannelbyone:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *bc_org1
+                - *bc_org2
+                - *bc_org3
+
+    TestOrgsChannelbytwo:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *bc_org1
+                - *bc_org3
+
+    TestOrgsChannelbythree:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *bc_org2
+                - *bc_org3
+
+Organizations:
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererMSP
+        MSPDir: /home/pigg/Fabric Test/crypto-config/ordererOrganizations/qklszzn.com/msp
+
+    - &bc_org1
+        Name: BcOrg1MSP
+        ID: BcOrg1MSP
+        MSPDir: /home/pigg/Fabric Test/crypto-config/peerOrganizations/org1.qklszzn.com/msp
+        AnchorPeers:
+            - Host: peer0.org1.qklszzn.com
+              Port: 7051
+
+    - &bc_org2
+        Name: BcOrg2MSP
+        ID: BcOrg2MSP
+        MSPDir: /home/pigg/Fabric Test/crypto-config/peerOrganizations/org2.qklszzn.com/msp
+        AnchorPeers:
+            - Host: peer0.org2.qklszzn.com
+              Port: 7051
+
+    - &bc_org3
+        Name: BcOrg3MSP
+        ID: BcOrg3MSP
+        MSPDir: /home/pigg/Fabric Test/crypto-config/peerOrganizations/org3.qklszzn.com/msp
+        AnchorPeers:
+            - Host: peer0.org2.qklszzn.com
+              Port: 7051
+
+
+
+Orderer: &OrdererDefaults
+    OrdererType: kafka
+
+    Addresses:
+        - orderer.qklszzng.com:7050
+
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 98 MB
+        PreferredMaxBytes: 512 KB
+    Kafka:
+        Brokers:
+            - 127.0.0.1:9092
+    Organizations:
+
+Application: &ApplicationDefaults
+    Organizations:
